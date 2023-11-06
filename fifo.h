@@ -24,6 +24,8 @@ struct Node {
 class LinkedList {
 
 public:
+    LinkedList();
+    ~Linkedlist();
     bool addNode(int, string*);
     bool deleteNode(int);
     
