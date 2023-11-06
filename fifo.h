@@ -25,13 +25,14 @@ class LinkedList {
 
 public:
     LinkedList();
-    ~Linkedlist();
+    ~LinkedList();
     bool addNode(int, string*);
-    bool deleteNode(int);
+    bool deleteNode();
     
 private:
     Node *head;
     Node *tail;
+    static Node* allocateNode(int, string*);
 };
 
 class Stack {
