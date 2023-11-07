@@ -27,10 +27,14 @@ int main(){
         cout << stack1.push(ids[i], &strs[i]) <<endl;
     }
     cout << "Pulling:" <<endl;
+    Data *bucket = new Data;
     for (int i = 0; i < DATA_SIZE; i++){
-        Data *bucket = new Data;
-        cout << stack1.pull(*bucket) <<endl;
+        std::cout << "aw212" << std::endl;
+        std::cout << "aaa" << std::endl;
+        cout << stack1.pull(*bucket) << ": ";
+        std::cout << "a" << std::endl;
         cout << bucket->id << ": " << bucket->information <<endl;
+        std::cout << "b" << std::endl;
     }
     
     

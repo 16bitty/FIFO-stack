@@ -40,17 +40,25 @@ bool LinkedList::addNode(int idNum, string* info){
 }
 
 bool LinkedList::deleteNode(){
+    std::cout << "0" << std::endl;
     bool deleted = false;
-    Node *current = this->tail;
+    std::cout << "1" << std::endl;
+    Node *current = this->head;
+    std::cout << "2" << std::endl;
     if(current){
-        tail = current->prev;
-        if(current->prev){
-            std::cout<<current->prev->data.id <<std::endl;
-            current->prev->next = nullptr;
+        std::cout << "3" << std::endl;
+        head = current->next;
+        std::cout << "4" << std::endl;
+        if(current->next){
+            std::cout << "5" << std::endl;
+            current->next->prev = nullptr;
             current->prev = nullptr;
+            std::cout << "6" << std::endl;
         }
+        std::cout << "7" << std::endl;
         delete current;
         current = nullptr;
+        std::cout << "8" << std::endl;
         deleted = true;
     }
     return deleted;
@@ -59,8 +67,8 @@ bool LinkedList::deleteNode(){
 bool LinkedList::pullNode(Data& item){
     bool pulled = false;
     if(this->head->data.id){
-        item.id = this->tail->data.id;
-        item.information = this->tail->data.information;
+        item.id = this->head->data.id;
+        item.information = this->head->data.information;
         pulled = true;
     }
     return pulled;
@@ -68,12 +76,12 @@ bool LinkedList::pullNode(Data& item){
 
 bool LinkedList::peekNode(Data& item){
     bool peeked = false;
-    if(this->tail->data.id){
-        item.id = this->tail->data.id;
-        item.information = this->tail->data.information;
+    if(this->head->data.id){
+        item.id = this->head->data.id;
+        item.information = this->head->data.information;
         peeked = true;
     }
-    return pulled;
+    return peeked;
 }
 
 Node* LinkedList::allocateNode(int idNum, string* info){
