@@ -5,6 +5,7 @@
  **********************/
 
 #include "fifo.h"
+#include <iostream>
 
 LinkedList::LinkedList(){
     this->head = nullptr;
@@ -12,11 +13,8 @@ LinkedList::LinkedList(){
 }
 
 LinkedList::~LinkedList(){
-    Node *current = this->head;
-    while(current){
-        Node *temp = current->next;
-        delete current;
-        current = temp;
+    while(this->head && this->tail){
+        this->deleteNode();
     }
     this->head = nullptr;
     this->tail = nullptr;
@@ -26,7 +24,16 @@ bool LinkedList::addNode(int idNum, string* info){
     bool added = false;
     if(idNum > 0 && *info != ""){
         Node *item = allocateNode(idNum, info);
-        tail = item;
+        if(head == nullptr){
+            head = item;
+            tail = item;
+        }
+        else{
+            item->prev = tail;
+            item->prev->next = item;
+            item->next = nullptr;
+            tail = item;
+        }
         added = true;
     }
     return added;
@@ -34,6 +41,18 @@ bool LinkedList::addNode(int idNum, string* info){
 
 bool LinkedList::deleteNode(){
     bool deleted = false;
+    Node *current = this->tail;
+    if(current){
+        tail = current->prev;
+        if(current->prev){
+            std::cout<<current->prev->data.id <<std::endl;
+            current->prev->next = nullptr;
+            current->prev = nullptr;
+        }
+        delete current;
+        current = nullptr;
+        deleted = true;
+    }
     return deleted;
 }
 
