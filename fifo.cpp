@@ -56,6 +56,26 @@ bool LinkedList::deleteNode(){
     return deleted;
 }
 
+bool LinkedList::pullNode(Data& item){
+    bool pulled = false;
+    if(this->head->data.id){
+        item.id = this->tail->data.id;
+        item.information = this->tail->data.information;
+        pulled = true;
+    }
+    return pulled;
+}
+
+bool LinkedList::peekNode(Data& item){
+    bool peeked = false;
+    if(this->tail->data.id){
+        item.id = this->tail->data.id;
+        item.information = this->tail->data.information;
+        peeked = true;
+    }
+    return pulled;
+}
+
 Node* LinkedList::allocateNode(int idNum, string* info){
     Node* item = new Node;
     item->data.id = idNum;
@@ -66,20 +86,20 @@ Node* LinkedList::allocateNode(int idNum, string* info){
 }
 
 Stack::Stack(){
-    
+    stack = new LinkedList;
 }
 
 Stack::~Stack(){
-    
+    delete stack;
 }
 
-bool Stack::push(int, string&){
-    bool pushed = false;
-    return pushed;
+bool Stack::push(int id, string* info){
+    return stack->addNode(id, info);
 }
 
-bool Stack::pull(Data&){
-    bool pulled = false;
+bool Stack::pull(Data& requestNode){
+    bool pulled = stack->pullNode(requestNode);
+    stack->deleteNode();
     return pulled;
 }
 

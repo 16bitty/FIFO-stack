@@ -28,11 +28,14 @@ public:
     ~LinkedList();
     bool addNode(int, string*);
     bool deleteNode();
-    
+    bool pullNode(Data&);
+    bool peekNode(Data&);
+
 private:
+    static Node* allocateNode(int, string*);
     Node *head;
     Node *tail;
-    static Node* allocateNode(int, string*);
+    
 };
 
 class Stack {
@@ -40,12 +43,12 @@ class Stack {
 public:
     Stack();
     ~Stack();
-    bool push(int, string&);
+    bool push(int, string*);
     bool pull(Data&);
     bool peek(Data&);
     bool isEmpty();
     
 private:
-    LinkedList **stack;
+    LinkedList *stack;
 };
 #endif

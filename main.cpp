@@ -21,17 +21,18 @@ int main(){
     for (int i = 0; i < DATA_SIZE; i++){
         cout << ids[i] << ": " << strs[i] <<endl;
     }
-    LinkedList list1;
-    cout << "Deleting:" <<endl;
-    cout << list1.deleteNode() <<endl;
-    cout << "adding:" <<endl;
+    Stack stack1;
+    cout << "Pushing:" <<endl;
     for (int i = 0; i < DATA_SIZE; i++){
-        cout << list1.addNode(ids[i], &strs[i]) <<endl;
+        cout << stack1.push(ids[i], &strs[i]) <<endl;
     }
-    cout << "Deleting:" <<endl;
+    cout << "Pulling:" <<endl;
     for (int i = 0; i < DATA_SIZE; i++){
-        cout << list1.deleteNode() <<endl;
+        Data *bucket = new Data;
+        cout << stack1.pull(*bucket) <<endl;
+        cout << bucket->id << ": " << bucket->information <<endl;
     }
-    cout << "done:" <<endl;
+    
+    
     return 0;
 }
