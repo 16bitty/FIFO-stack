@@ -8,6 +8,9 @@
 
 int main(){
     srand(time(NULL));
+    Data *bucket = new Data;
+    bucket->id = -1;
+    bucket->information = "";
     
     int ids[DATA_SIZE];
     string strs[DATA_SIZE];
@@ -21,22 +24,51 @@ int main(){
     for (int i = 0; i < DATA_SIZE; i++){
         cout << ids[i] << ": " << strs[i] <<endl;
     }
-    Stack stack1;
-    cout << "Pushing:" <<endl;
-    for (int i = 0; i < DATA_SIZE; i++){
-        cout << stack1.push(ids[i], &strs[i]) <<endl;
-    }
-    cout << "Pulling:" <<endl;
-    Data *bucket = new Data;
-    for (int i = 0; i < DATA_SIZE; i++){
-        std::cout << "aw212" << std::endl;
-        std::cout << "aaa" << std::endl;
-        cout << stack1.pull(*bucket) << ": ";
-        std::cout << "a" << std::endl;
-        cout << bucket->id << ": " << bucket->information <<endl;
-        std::cout << "b" << std::endl;
-    }
     
+    Stack stack1;
+    cout << "isEmpty:" << stack1.isEmpty() <<endl;
+    cout << "Peeking:" <<endl;
+    stack1.peek(*bucket);
+    cout << bucket->id << ": " << bucket->information <<endl;
+    for (int i = 0; i < DATA_SIZE; i++){
+        cout << "Pushing:" <<endl;
+        cout << stack1.push(ids[i], &strs[i]) <<endl;
+        cout << "Peeking:" <<endl;
+        stack1.peek(*bucket);
+        cout << bucket->id << ": " << bucket->information <<endl;
+    }
+    cout << "isEmpty:" << stack1.isEmpty() <<endl;
+    for (int i = 0; i < DATA_SIZE; i++){
+        cout << "Pulling:" <<endl;
+        cout << stack1.pull(*bucket) << ": ";
+        cout << bucket->id << ": " << bucket->information <<endl;
+        cout << "Peeking:" <<endl;
+        cout << stack1.peek(*bucket) << ": ";
+        cout << bucket->id << ": " << bucket->information <<endl;
+    }
+    cout << "isEmpty:" << stack1.isEmpty() <<endl;
+    
+    cout << "starting random testing..." <<endl;
+    for (int i =0; i < RANDTESTSIZE; i++){
+        int testNum = rand() % 1000;
+        int testString = rand() % DATA_SIZE;
+        switch(rand() % METHODS){
+            case 0:
+                cout << stack1.push(testNum, &strs[testString]) <<endl;
+                break;
+            case 1:
+                cout << stack1.pull(*bucket) << ": ";
+                cout << bucket->id << ": " << bucket->information <<endl;
+                break;
+            case 2:
+                cout << stack1.peek(*bucket) << ": ";
+                cout << bucket->id << ": " << bucket->information <<endl;
+                break;
+            case 3:
+                cout << "isEmpty:" << stack1.isEmpty() <<endl;
+                break;
+        }
+    }
     
     return 0;
 }

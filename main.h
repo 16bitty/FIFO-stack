@@ -16,6 +16,8 @@
 
 #define MAXID 100
 #define DATA_SIZE 10
+#define RANDTESTSIZE DATA_SIZE * 20
+#define METHODS 4
 
 using std::cout;
 using std::endl;

@@ -40,46 +40,31 @@ bool LinkedList::addNode(int idNum, string* info){
 }
 
 bool LinkedList::deleteNode(){
-    std::cout << "0" << std::endl;
     bool deleted = false;
-    std::cout << "1" << std::endl;
     Node *current = this->head;
-    std::cout << "2" << std::endl;
     if(current){
-        std::cout << "3" << std::endl;
         head = current->next;
-        std::cout << "4" << std::endl;
         if(current->next){
-            std::cout << "5" << std::endl;
             current->next->prev = nullptr;
             current->prev = nullptr;
-            std::cout << "6" << std::endl;
         }
-        std::cout << "7" << std::endl;
         delete current;
         current = nullptr;
-        std::cout << "8" << std::endl;
         deleted = true;
     }
     return deleted;
 }
 
-bool LinkedList::pullNode(Data& item){
-    bool pulled = false;
-    if(this->head->data.id){
-        item.id = this->head->data.id;
-        item.information = this->head->data.information;
-        pulled = true;
-    }
-    return pulled;
-}
-
 bool LinkedList::peekNode(Data& item){
     bool peeked = false;
-    if(this->head->data.id){
+    if(this->head && this->head->data.id){
         item.id = this->head->data.id;
         item.information = this->head->data.information;
         peeked = true;
+    }
+    else{
+        item.id = -1;
+        item.information = "";
     }
     return peeked;
 }
@@ -106,17 +91,18 @@ bool Stack::push(int id, string* info){
 }
 
 bool Stack::pull(Data& requestNode){
-    bool pulled = stack->pullNode(requestNode);
+    bool pulled = stack->peekNode(requestNode);
     stack->deleteNode();
     return pulled;
 }
 
-bool Stack::peek(Data&){
-    bool peeked = false;
+bool Stack::peek(Data& requestNode){
+    bool peeked = stack->peekNode(requestNode);
     return peeked;
 }
 
 bool Stack::isEmpty(){
-    bool empty = false;
-    return empty;
+    Data *bucket = new Data;
+    bool empty = stack->peekNode(*bucket);
+    return !empty;
 }
